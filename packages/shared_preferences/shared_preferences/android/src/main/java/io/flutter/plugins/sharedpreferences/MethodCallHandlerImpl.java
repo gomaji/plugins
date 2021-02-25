@@ -165,7 +165,8 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
     Map<String, ?> allPrefs = preferences.getAll();
     Map<String, Object> filteredPrefs = new HashMap<>();
     for (String key : allPrefs.keySet()) {
-      if (key.startsWith("flutter.")) {
+      /**原本使用時沒有key加上flutter. ，為了兼容舊版拿掉判斷*/
+//      if (key.startsWith("flutter.")) {
         Object value = allPrefs.get(key);
         if (value instanceof String) {
           String stringValue = (String) value;
@@ -196,7 +197,7 @@ class MethodCallHandlerImpl implements MethodChannel.MethodCallHandler {
           value = listValue;
         }
         filteredPrefs.put(key, value);
-      }
+//      }
     }
     return filteredPrefs;
   }
